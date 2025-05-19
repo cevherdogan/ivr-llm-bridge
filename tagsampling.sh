@@ -15,13 +15,13 @@ git tag -a v0.1.0 -m "Initial public draft with CloudFormation + LLM workflow"
 git remote add origin https://github.com/cevherdogan/ivr-llm-bridge.git
 git push -u origin main --tags
 
-echo "Have you tried auto_commit_push.sh yet?"
+echo "Have you tried scripts/auto_commit_push.sh yet?"
 echo """
 # Basic commit (no tag)
-./auto_commit_push.sh --msg commit_msg.txt
+./scripts/auto_commit_push.sh --msg commit_msg.txt
 
 # Commit + Tag
-./auto_commit_push.sh --tag --msg commit_msg.txt
+./scripts/auto_commit_push.sh --tag --msg commit_msg.txt
 """
 
 

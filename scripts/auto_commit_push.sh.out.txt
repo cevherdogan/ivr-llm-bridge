@@ -1,0 +1,27 @@
+cloudruple:ivr-llm-bridge cevherdogan$ ./scripts/auto_commit_push.sh --tag --msg commit_msg.txt
+🔍 Current branch: main
+🚨 Continue committing to this branch? (y/n): y
+[main a289c15] tagging and releasing as to baseline technical vision for collaboration and roadmap
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+ create mode 100644 commit_msg.txt
+✅ Committed using commit_msg.txt
+📌 Enter tag version (e.g., v0.1.0): v0.1.1
+📝 Enter tag message: collab_roadmap_vision_init
+✅ Tagged as v0.1.1
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 3.20 KiB | 3.20 MiB/s, done.
+Total 9 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To github.com:cevherdogan/ivr-llm-bridge.git
+   4619d63..a289c15  main -> main
+Enumerating objects: 1, done.
+Counting objects: 100% (1/1), done.
+Writing objects: 100% (1/1), 174 bytes | 174.00 KiB/s, done.
+Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:cevherdogan/ivr-llm-bridge.git
+ * [new tag]         v0.1.1 -> v0.1.1
+🎉 Done!
+

@@ -1,0 +1,67 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: IVR-to-LLM integration stack using Amazon Connect, Lambda, and IAM roles.
+
+Parameters:
+  LambdaFunctionName:
+    Type: String
+    Default: IVRLLMHandler
+
+Resources:
+  IVRLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${LambdaFunctionName}Role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaBasicExecution
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+        - PolicyName: AllowBedrockInvoke
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource: "*"
+
+  IVRLLMLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Ref LambdaFunctionName
+      Runtime: python3.12
+      Handler: handler.lambda_handler
+      Role: !GetAtt IVRLambdaExecutionRole.Arn
+      Timeout: 30
+      Code:
+        ZipFile: |
+          import json
+          def lambda_handler(event, context):
+              return {
+                  'statusCode': 200,
+                  'body': json.dumps('Hello from IVR-LLM bridge')
+              }
+
+Outputs:
+  LambdaFunctionName:
+    Description: Lambda function name
+    Value: !Ref IVRLLMLambdaFunction
+
+  LambdaRoleArn:
+    Description: IAM Role ARN
+    Value: !GetAtt IVRLambdaExecutionRole.Arn
+
